@@ -1,0 +1,9 @@
+ensiie_activity:
+    resource: "@EnsiieActivityBundle/Resources/config/routing.yml"
+    prefix:   /ensiie
+
+sdz_blog:
+    resource: "@SdzBlogBundle/Resources/config/routing.yml"
+    prefix:   /sdz
+
+

@@ -1,0 +1,3 @@
+ensiie_iaato_homepage:
+    pattern:  /hello
+    defaults: { _controller: EnsiieIaatoBundle:Iaato:index }

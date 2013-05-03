@@ -1,0 +1,5 @@
+ensiie_iaato:
+    resource: "@EnsiieIaatoBundle/Resources/config/routing.yml"
+    prefix:   /
+
+
