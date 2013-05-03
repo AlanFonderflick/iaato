@@ -69,3 +69,8 @@ sensio_framework_extra:
     request: { converters: true }
     view:    { annotations: true }
     cache:   { annotations: true }
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: Ensiie\UserBundle\Entity\User
