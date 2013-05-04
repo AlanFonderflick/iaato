@@ -9,11 +9,13 @@
  */
 
 namespace Ensiie\IaatoBundle\DataFixtures\ORM;
+use Ensiie\IaatoBundle\Entity\Ship;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Ensiie\IaatoBundle\Entity\Ship;
 
-class Ships implements FixtureInterface
+class Ships extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
@@ -21,7 +23,8 @@ class Ships implements FixtureInterface
         $ship = new Ship();
         $ship->setName('Titanic');
         $ship->setCompany(
-            $manager->getRepository("EnsiieIaatoBundle:Company")->findOneBy(array("name"=>"La Companie"))
+            $manager->getRepository("EnsiieIaatoBundle:Company")
+                    ->findOneBy(array("name"=>"La Companie"))
         );
         $manager->persist($ship);
         
@@ -42,6 +45,10 @@ class Ships implements FixtureInterface
 
 
         $manager->flush();
+    }
+    public function getOrder()
+    {
+        return 3; // the order in which fixtures will be loaded
     }
 }
 

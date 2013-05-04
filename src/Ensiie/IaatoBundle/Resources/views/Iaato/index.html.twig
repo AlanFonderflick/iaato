@@ -11,6 +11,6 @@
     {% for ship in ships %}
       <tr>  
         <th> {{ ship.name }} </th>
-        <th> {{ ship.company.name }} </th>
+        <th> {{ ship.company.getName() }} </th>
     {% endfor %}
 {% endblock %}

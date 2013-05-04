@@ -18,14 +18,27 @@ class Companies implements FixtureInterface
     public function load(ObjectManager $manager)
     {
         $noms = array('La Companie', 'BestCompany', 'FavoriteCompany', 'L\'Armateur');
-        foreach($noms as $i => $nom)
-        {
-            $liste[$i] = new Company();
-            $liste[$i]->setName($nom);
-            $manager->persist($liste[$i]);
-        }
+        
+        $company = new Company();
+        $company->setName('La Companie');
+        $manager->persist($company);
+
+        $company = new Company();
+        $company->setName('BestCompany');
+        $manager->persist($company);
+        
+        $company = new Company();
+        $company->setName('MyMajorCompany');
+        $manager->persist($company);
+
+
         $manager->flush();
     }
+    public function getOrder()
+    {
+       return 1; // the order in which fixtures will be loaded
+    }
+
 }
 
 ?>
