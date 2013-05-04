@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
  
-    <title>{% block title %}Ragots{% endblock %}</title>
+    <title>{% block title %}IAATO{% endblock %}</title>
  
     {% block stylesheets %}
       <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.css') }}" type="text/css" />
@@ -13,24 +13,24 @@
   <body>
       <div class="container">
 	      <div id="header" class="hero-unit">
-		<h1> Les Ragots </h1>
-	      	<p> Les ragots de l'Ensiie. </p>
+		<h1> IAATO </h1>
+	      	<p> Shipping in Antartica. </p>
 	      </div>
+	      {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    Logged as {{ app.user.username }} - <a href="{{ path('fos_user_security_logout') }}">Logout</a>
+              {% else %}
+                    <a href="{{ path('fos_user_security_login') }}">Login</a>
+              {% endif %}
 	      
-	      <div id="ajout-ragot" class="raw">
-		      {% block ajout_ragot_body %}
-		      {% endblock %}
-              </div>
 	      
 	      <div id="content" class="nav nav-pills nav-stacked">
 		      <hr>
-		      {% block phil_ragot_body %}
+		      {% block body %}
 	              {% endblock %}
  	      </div>
  
- 
-      <footer>
-        <p>Les ragots de l'ENSIIE</p>
+        <footer>
+        <p>IAATO</p>
 	</footer>
 
      </div>

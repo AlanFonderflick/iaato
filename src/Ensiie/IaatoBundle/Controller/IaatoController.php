@@ -9,7 +9,14 @@ class IaatoController extends Controller
 {
     public function indexAction()
     {
-        return new Response("Hello World!");
+        $liste = $this->getDoctrine()
+                      ->getManager()
+                      ->getRepository('EnsiieIaatoBundle:Ship')
+                      ->findAll();
+
+        return $this->render('EnsiieIaatoBundle:Iaato:index.html.twig',
+            array('ships' => $liste)
+        );
     }
     
 }
