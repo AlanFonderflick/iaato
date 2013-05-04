@@ -1,16 +1,34 @@
 {% extends "::layout.html.twig" %}
 
 {% block body %}
+    <a href="{{ path('iaato_sort_date') }} > Sort by date</a>
+    <a href="{{ path('iaato_sort_ship') }} > Sort by ship</a>
+    <a href="{{ path('iaato_sort_ship') }} > Sort by company</a>
+
     <table class="table table-hover table-bordered" style:";background-color:white;">
     <thead style="background-color:#49afcd">
-     <tr>
-        <th> Ship </th>
+    <tr>
+        <th> Date </th>
+        <th>  Ship </th>
         <th> Company </th>
+        <th> Site 1</th>
+        <th> Site 2</th>
+        <th> Site 3</th>
+        <th> Site 4</th>
       </tr>
      </thead> 
-    {% for ship in ships %}
+    {% for planning  in plannings %}
       <tr>  
-        <th> {{ ship.name }} </th>
-        <th> {{ ship.company.getName() }} </th>
+        <th> {{ planning.day | date('d-m-Y')  }} </th>
+        <th> {{ planning.ship.getName()}} </th>
+        <th> {{ planning.ship.company.getName() }} </th>
+        <th> {{ planning.site1.getName() }} 
+             <br> Duration: {{ planning.duration1 | date('H:i:s') }}  </th>
+        <th> {{ planning.site2.getName() }}
+             <br> Duration: {{ planning.duration2 | date('H:i:s') }}  </th>
+        <th> {{ planning.site3.getName() }}
+             <br> Duration: {{ planning.duration3 | date('H:i:s') }}  </th>
+        <th> {{ planning.site4.getName() }}  
+             <br> Duration: {{ planning.duration4 | date('H:i:s') }}  </th>
     {% endfor %}
 {% endblock %}

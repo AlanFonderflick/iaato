@@ -1,3 +1,15 @@
-ensiie_iaato_homepage:
+iaato_homepage:
     pattern:  /
     defaults: { _controller: EnsiieIaatoBundle:Iaato:index }
+
+iaato_sort_date:
+    pattern: /sort/date
+    defaults: {_controller: EnsiieIaatoBundle:Iaato:sortDate }
+
+iaato_sort_ship:
+    pattern: /sort/ship
+    defaults: {_controller: EnsiieIaatoBundle:Iaato:sortShip }
+
+iaato_sort_company:
+    pattern: /sort/company
+    defaults: {_controller: EnsiieIaatoBundle:Iaato:sortCompany }

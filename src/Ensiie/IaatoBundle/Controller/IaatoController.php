@@ -11,11 +11,11 @@ class IaatoController extends Controller
     {
         $liste = $this->getDoctrine()
                       ->getManager()
-                      ->getRepository('EnsiieIaatoBundle:Ship')
+                      ->getRepository('EnsiieIaatoBundle:Planning')
                       ->findAll();
 
         return $this->render('EnsiieIaatoBundle:Iaato:index.html.twig',
-            array('ships' => $liste)
+            array('plannings' => $liste)
         );
     }
     

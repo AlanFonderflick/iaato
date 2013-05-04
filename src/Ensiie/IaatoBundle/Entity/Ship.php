@@ -29,7 +29,7 @@ class Ship
     private $name;
 
     /**
-     *@ORM\ManyToOne(targetEntity="Ensiie\IaatoBundle\Entity\Company",inversedBy="Ship")) 
+     *@ORM\ManyToOne(targetEntity="Ensiie\IaatoBundle\Entity\Company",inversedBy="Ship") 
      *@ORM\JoinColumn(nullable=true)
      */
     private $company;
