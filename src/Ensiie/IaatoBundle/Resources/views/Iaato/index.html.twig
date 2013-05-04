@@ -1,9 +1,13 @@
 {% extends "::layout.html.twig" %}
 
 {% block body %}
-    <a href="{{ path('iaato_sort_date') }} > Sort by date</a>
-    <a href="{{ path('iaato_sort_ship') }} > Sort by ship</a>
-    <a href="{{ path('iaato_sort_ship') }} > Sort by company</a>
+    <div id="sort_planning" >
+    <a href="{{ path('iaato_sort_date') }}" > Sort by date</a>
+    |
+    <a href="{{ path('iaato_sort_ship') }}" > Sort by ship</a>
+    |
+    <a href="{{ path('iaato_sort_ship') }}" > Sort by company</a>
+    </div>
 
     <table class="table table-hover table-bordered" style:";background-color:white;">
     <thead style="background-color:#49afcd">
@@ -31,4 +35,5 @@
         <th> {{ planning.site4.getName() }}  
              <br> Duration: {{ planning.duration4 | date('H:i:s') }}  </th>
     {% endfor %}
+    </table>
 {% endblock %}

@@ -18,6 +18,43 @@ class IaatoController extends Controller
             array('plannings' => $liste)
         );
     }
+
+    public function sortDateAction()
+    {
+        $liste = $this->getDoctrine()
+                      ->getManager()
+                      ->getRepository('EnsiieIaatoBundle:Planning')
+                      ->trieDate();
+
+        return $this->render('EnsiieIaatoBundle:Iaato:index.html.twig',
+            array('plannings' => $liste)
+        );
+    }
+    public function sortShipAction()
+    {
+
+        $liste = $this->getDoctrine()
+                      ->getManager()
+                      ->getRepository('EnsiieIaatoBundle:Planning')
+                      ->trieShip();
+
+        return $this->render('EnsiieIaatoBundle:Iaato:index.html.twig',
+            array('plannings' => $liste)
+        );
+    }
+    public function sortCompanyAction()
+    {
+
+        $liste = $this->getDoctrine()
+                      ->getManager()
+                      ->getRepository('EnsiieIaatoBundle:Planning')
+                      ->trieCompany();
+
+        return $this->render('EnsiieIaatoBundle:Iaato:index.html.twig',
+            array('plannings' => $liste)
+        );
+    }
+    
     
 }
 
