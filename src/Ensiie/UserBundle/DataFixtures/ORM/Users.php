@@ -25,6 +25,11 @@ class Users extends AbstractFixture implements OrderedFixtureInterface
         $user->setPlainPassword('titi');
         $user->setEnabled(true);
         $user->setRoles(array('ROLE_USER'));
+        $user->setShip(
+            $manager->getRepository("EnsiieIaatoBundle:Ship")
+            ->findOneBy(array("name"=>"Titanic"))
+        );
+    
         $manager->persist($user);
 
         $user = new User();
@@ -33,6 +38,10 @@ class Users extends AbstractFixture implements OrderedFixtureInterface
         $user->setPlainPassword('admin');
         $user->setEnabled(true);
         $user->setRoles(array('ROLE_ADMIN'));
+        $user->setShip(
+            $manager->getRepository("EnsiieIaatoBundle:Ship")
+            ->findOneBy(array("name"=>"Queen Mary"))
+        );
         $manager->persist($user);
 
         
