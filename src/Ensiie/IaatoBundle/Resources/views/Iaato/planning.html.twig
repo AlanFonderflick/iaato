@@ -21,6 +21,7 @@
         <th> Site 2</th>
         <th> Site 3</th>
         <th> Site 4</th>
+	<th> Edit </th>
       </tr>
      </thead> 
     {% for planning  in plannings %}
@@ -36,6 +37,11 @@
              <br> Duration: {{ planning.duration3 | date('H:i:s') }}  </th>
         <th> {{ planning.site4.getName() }}  
              <br> Duration: {{ planning.duration4 | date('H:i:s') }}  </th>
+	{% if(app.user.ship == planning.ship) %}
+	<th>	Edit </th>
+	{% else %}
+	<th> </th>
+	{% endif %}
     {% endfor %}
     </table>
 {% endblock %}
