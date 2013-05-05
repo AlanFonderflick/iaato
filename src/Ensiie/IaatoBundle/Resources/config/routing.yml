@@ -7,3 +7,7 @@ iaato_planning:
 iaato_homepage:
     pattern: /
     defaults: {_controller: EnsiieIaatoBundle:Iaato:index }
+
+iaato_admin:
+    pattern: /admin
+    defaults: {_controller: EnsiieIaatoBundle:Iaato:admin }

@@ -4,6 +4,8 @@
 namespace Ensiie\IaatoBundle\Controller;         
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+
 
 class IaatoController extends Controller
 {
@@ -31,7 +33,23 @@ class IaatoController extends Controller
             array('plannings' => $liste)
         );
     } 
-    
+    public function adminAction()
+    {
+        if( ! $this->get('security.context')->isGranted('ROLE_ADMIN') )
+        {
+            // Sinon on déclenche une exception "Accès Interdit"
+             throw new AccessDeniedHttpException('Access restricted to the Admin.');
+        }
+        
+        $liste_users = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('EnsiieUserBundle:User')
+                            ->findAll();
+
+        return $this->render('EnsiieIaatoBundle:Iaato:admin.html.twig',
+            array('users' => $liste_users)
+        );
+    } 
 
     public function sortDate()
     {
