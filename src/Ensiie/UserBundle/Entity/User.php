@@ -17,7 +17,7 @@ class User extends BaseUser
     protected $id;
     
     /**
-    * @ORM\ManyToOne(targetEntity="Ensiie\IaatoBundle\Entity\Ship")
+    * @ORM\OneToOne(targetEntity="Ensiie\IaatoBundle\Entity\Ship",cascade={"persist"})
     *@ORM\JoinColumn(nullable=true)
     */
     private $ship;

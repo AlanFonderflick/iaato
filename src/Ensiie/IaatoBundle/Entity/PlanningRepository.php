@@ -33,4 +33,14 @@ class PlanningRepository extends EntityRepository
                       WHERE s.id = p.ship AND s.company = c.id ORDER BY c.name ASC') 
                     ->getResult();
     }
+    public function trieMe($user)
+    {   
+       $query= $this->_em
+                    ->createQuery('SELECT p FROM EnsiieUserBundle:User u, EnsiieIaatoBundle:Planning p 
+                     WHERE u.ship = p.ship AND u.ship = :id ORDER BY p.day DESC'); 
+        $query->setParameter('id',$user->getShip());
+        return $query->getResult();
+       
+    }
+
 }

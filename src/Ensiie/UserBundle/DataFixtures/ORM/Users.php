@@ -40,7 +40,7 @@ class Users extends AbstractFixture implements OrderedFixtureInterface
         $user->setRoles(array('ROLE_ADMIN'));
         $user->setShip(
             $manager->getRepository("EnsiieIaatoBundle:Ship")
-            ->findOneBy(array("name"=>"Queen Mary"))
+            ->findOneBy(array("name"=>"Queen Mary 2"))
         );
         $manager->persist($user);
 

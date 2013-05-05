@@ -27,6 +27,9 @@ class IaatoController extends Controller
             case "company":
                 $liste = $this->sortCompany();
                 break;
+            case "me":
+                $liste = $this->sortMe();
+                break;
         }
 
         return $this->render('EnsiieIaatoBundle:Iaato:planning.html.twig',
@@ -76,6 +79,16 @@ class IaatoController extends Controller
                       ->getManager()
                       ->getRepository('EnsiieIaatoBundle:Planning')
                       ->trieCompany();
+        return $liste;
+    }
+    public function sortMe()
+    {
+        $user = $this->container->get('security.context')->getToken()->getUser();
+
+        $liste = $this->getDoctrine()
+                      ->getManager()
+                      ->getRepository('EnsiieIaatoBundle:Planning')
+                      ->trieMe($user);
         return $liste;
     }
 }

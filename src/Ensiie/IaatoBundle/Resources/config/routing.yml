@@ -2,7 +2,7 @@ iaato_planning:
     pattern: /planning/{sort}
     defaults: {_controller: EnsiieIaatoBundle:Iaato:planning, sort:date}
     requirements:
-        sort: date|ship|company
+        sort: date|ship|company|me
 
 iaato_homepage:
     pattern: /
