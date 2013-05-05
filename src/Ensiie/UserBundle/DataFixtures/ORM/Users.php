@@ -21,15 +21,17 @@ class Users extends AbstractFixture implements OrderedFixtureInterface
     {
         $user = new User;
         $user->setEmail('t@gmail.com');
-        $user->setUsername('toto');
-        $user->setPassword(sha1('titi')); 
+        $user->setUserName('toto');
+        $user->setPlainPassword('titi');
+        $user->setEnabled(true);
+        $user->setRoles(array('ROLE_USER'));
         $manager->persist($user);
 
         $manager->flush();
     }
     public function getOrder()
     {
-         return 4; // the order in which fixtures will be loaded
+         return 6; // the order in which fixtures will be loaded
                             }
 }
 
