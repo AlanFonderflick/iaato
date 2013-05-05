@@ -1,3 +1,17 @@
+#TODO
+- Edit planning (only for my ship)
+- Edit my profile
+- Manage conflicts
+- Admin tools (create/edit/enable-disable/delete account)
+- Notifications in case of edited planning (if concerned)
+- Website design
+- Csv file upload-download
+- Add a explaining text on an edit
+
+#BUGS
+- Get all fos users not working (empy array)
+
+
 #Useful commands
 ###Update fixtures in database
 php app/console doctrine:fixture:load
@@ -15,5 +29,3 @@ php app/console doctrine:generate:entity
 php app/console doctrine:generate:entities Path-of-Entity
 
 
-#BUGS
-- Get all fos users not working (empy array)
