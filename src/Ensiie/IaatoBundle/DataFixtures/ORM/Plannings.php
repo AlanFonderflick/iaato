@@ -47,7 +47,65 @@ class Plannings extends AbstractFixture implements OrderedFixtureInterface
         $planning->setDuration3(new \Datetime('7:05:02'));
         $planning->setDuration4(new \Datetime('0:05:02'));
 
-       $manager->persist($planning);
+        $manager->persist($planning);
+//////////////////////////////////////////
+        $planning = new Planning();
+        $planning->setDay(new \Datetime("yesterday"));
+        $planning->setShip(
+            $manager->getRepository("EnsiieIaatoBundle:Ship")
+                    ->findOneBy(array("name"=>"Queen Mary"))
+                );
+        $planning->setSite1(
+            $manager->getRepository("EnsiieIaatoBundle:Site")
+            ->findOneBy(array("name"=>"L'ile aux ours"))
+        );
+        $planning->setSite2(
+            $manager->getRepository("EnsiieIaatoBundle:Site")
+            ->findOneBy(array("name"=>"L'ile aux pingouins"))
+        );
+        $planning->setSite3(
+            $manager->getRepository("EnsiieIaatoBundle:Site")
+            ->findOneBy(array("name"=>"L'ile aux ours"))
+        );
+        $planning->setSite4(
+            $manager->getRepository("EnsiieIaatoBundle:Site")
+            ->findOneBy(array("name"=>"L'ile deserte"))
+        );
+        $planning->setDuration1(new \Datetime('1:08:02'));
+        $planning->setDuration2(new \Datetime('6:05:02'));
+        $planning->setDuration3(new \Datetime('17:05:02'));
+        $planning->setDuration4(new \Datetime('0:05:02'));
+        $manager->persist($planning);
+        
+//////////////////////////////////////////
+        $planning = new Planning();
+        $planning->setDay(new \Datetime("tomorrow"));
+        $planning->setShip(
+            $manager->getRepository("EnsiieIaatoBundle:Ship")
+                    ->findOneBy(array("name"=>"Queen Mary 2"))
+                );
+        $planning->setSite1(
+            $manager->getRepository("EnsiieIaatoBundle:Site")
+            ->findOneBy(array("name"=>"L'ile aux ours"))
+        );
+        $planning->setSite2(
+            $manager->getRepository("EnsiieIaatoBundle:Site")
+            ->findOneBy(array("name"=>"L'ile deserte"))
+        );
+        $planning->setSite3(
+            $manager->getRepository("EnsiieIaatoBundle:Site")
+            ->findOneBy(array("name"=>"L'ile aux ours"))
+        );
+        $planning->setSite4(
+            $manager->getRepository("EnsiieIaatoBundle:Site")
+            ->findOneBy(array("name"=>"L'ile aux pingouins"))
+        );
+        $planning->setDuration1(new \Datetime('10:08:02'));
+        $planning->setDuration2(new \Datetime('16:05:02'));
+        $planning->setDuration3(new \Datetime('07:05:02'));
+        $planning->setDuration4(new \Datetime('08:05:02'));
+        $manager->persist($planning);
+        
 
 
         $manager->flush();
