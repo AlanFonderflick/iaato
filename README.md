@@ -16,5 +16,4 @@ php app/console doctrine:generate:entities Path-of-Entity
 
 
 #BUGS
-- Sort by ship/company not working (sql error)
 - Get all fos users not working (empy array)
