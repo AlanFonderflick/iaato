@@ -9,63 +9,57 @@ class IaatoController extends Controller
 {
     public function indexAction()
     {
-        $liste = $this->getDoctrine()
-                      ->getManager()
-                      ->getRepository('EnsiieIaatoBundle:Planning')
-                      ->findAll();
+    
+            return $this->render('EnsiieIaatoBundle:Iaato:account.html.twig');
+    }
+    public function planningAction($sort)
+    { 
+        switch($sort)
+        {
+            case "date":
+                $liste = $this->sortDate();
+                break;
+            case "ship":
+                $liste = $this->sortShip();
+                break;
+            case "company":
+                $liste = $this->sortCompany();
+                break;
+        }
 
-        return $this->render('EnsiieIaatoBundle:Iaato:index.html.twig',
+        return $this->render('EnsiieIaatoBundle:Iaato:planning.html.twig',
             array('plannings' => $liste)
         );
-    }
+    } 
+    
 
-    public function sortDateAction()
+    public function sortDate()
     {
         $liste = $this->getDoctrine()
                       ->getManager()
                       ->getRepository('EnsiieIaatoBundle:Planning')
                       ->trieDate();
 
-        return $this->render('EnsiieIaatoBundle:Iaato:index.html.twig',
-            array('plannings' => $liste)
-        );
+        return $liste;
     }
-    public function sortShipAction()
+    public function sortShip()
     {
 
         $liste = $this->getDoctrine()
                       ->getManager()
                       ->getRepository('EnsiieIaatoBundle:Planning')
                       ->trieShip();
-
-        return $this->render('EnsiieIaatoBundle:Iaato:index.html.twig',
-            array('plannings' => $liste)
-        );
+        return $liste;
     }
-    public function sortCompanyAction()
+    public function sortCompany()
     {
 
         $liste = $this->getDoctrine()
                       ->getManager()
                       ->getRepository('EnsiieIaatoBundle:Planning')
                       ->trieCompany();
-
-        return $this->render('EnsiieIaatoBundle:Iaato:index.html.twig',
-            array('plannings' => $liste)
-        );
+        return $liste;
     }
-    public function accountAction()
-    {
-        $user = $this->getDoctrine()
-                     ->getManager()
-                     ->getRepository('EnsiieUserBundle:User')
-                     ->findAll(); //temporaire
-        return $this->render('EnsiieIaatoBundle:Iaato:account.html.twig',
-            array('user' => $user)
-        );
-    }
-    
-    
 }
 
 

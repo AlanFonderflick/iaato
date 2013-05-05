@@ -2,11 +2,11 @@
 
 {% block body %}
     <div id="sort_planning" >
-    <a href="{{ path('iaato_sort_date') }}" > Sort by date</a>
+    <a href="{{ path('iaato_planning', {'sort':'date'}) }}" > Sort by date</a>
     |
-    <a href="{{ path('iaato_sort_ship') }}" > Sort by ship</a>
+    <a href="{{ path('iaato_planning', { 'sort':'ship'}) }}" > Sort by ship</a>
     |
-    <a href="{{ path('iaato_sort_ship') }}" > Sort by company</a>
+    <a href="{{ path('iaato_planning', { 'sort':'company'} ) }}" > Sort by company</a>
     </div>
 
     <table class="table table-hover table-bordered" style:";background-color:white;">

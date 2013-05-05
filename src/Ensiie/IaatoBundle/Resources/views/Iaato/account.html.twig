@@ -1,8 +1,11 @@
 {% extends "::layout.html.twig" %}
 
 {% block body %}
-    Name: {{ user.name }}
-    Email: {{ user.email }}
-    
+
+    <div id="account-info">
+	Name: {{ app.user.username }} <br>
+	Email: {{ app.user.email }}
+	
+    </div>
 
 {% endblock %}
