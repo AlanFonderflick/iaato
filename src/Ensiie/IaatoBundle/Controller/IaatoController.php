@@ -54,6 +54,16 @@ class IaatoController extends Controller
             array('plannings' => $liste)
         );
     }
+    public function accountAction()
+    {
+        $user = $this->getDoctrine()
+                     ->getManager()
+                     ->getRepository('EnsiieUserBundle:User')
+                     ->findAll(); //temporaire
+        return $this->render('EnsiieIaatoBundle:Iaato:account.html.twig',
+            array('user' => $user)
+        );
+    }
     
     
 }

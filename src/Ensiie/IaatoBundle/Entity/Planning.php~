@@ -1,0 +1,138 @@
+<?php
+
+namespace Ensiie\IaatoBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Planning
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Ensiie\IaatoBundle\Entity\PlanningRepository")
+ */
+class Planning
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="day", type="datetime")
+     */
+    private $day;
+
+     /**
+     * @ORM\ManyToOne(targetEntity="Ensiie\IaatoBundle\Entity\Ship")
+     *@ORM\JoinColumn(nullable=true)
+     */
+    private $ship;
+
+     /**
+     * @ORM\ManyToOne(targetEntity="Ensiie\IaatoBundle\Entity\Site")
+     *@ORM\JoinColumn(nullable=true)
+     */
+    private $site_1;
+     /**
+     * @ORM\ManyToOne(targetEntity="Ensiie\IaatoBundle\Entity\Site")
+     *@ORM\JoinColumn(nullable=true)
+     */
+    private $site_2;
+     /**
+     * @ORM\ManyToOne(targetEntity="Ensiie\IaatoBundle\Entity\Site")
+     *@ORM\JoinColumn(nullable=true)
+     */
+    private $site_3;
+
+     /**
+     * @ORM\ManyToOne(targetEntity="Ensiie\IaatoBundle\Entity\Site")
+     *@ORM\JoinColumn(nullable=true)
+     */
+    private $site_4;
+    
+    /**
+     * @var time
+     * @ORM\Column(name="duration_1",type="time")
+    */
+    private $duration_1;
+
+    /**
+     * @var time
+     * @ORM\Column(name="duration_2",type="time")
+    */
+    private $duration_2;
+    
+    /**
+     * @var time
+     * @ORM\Column(name="duration_3",type="time")
+    */
+    private $duration_3;
+    
+    /**
+     * @var time
+     * @ORM\Column(name="duration_4",type="time")
+    */
+    private $duration_4;
+    
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set day
+     *
+     * @param \DateTime $day
+     * @return Planning
+     */
+    public function setDay($day)
+    {
+        $this->day = $day;
+    
+        return $this;
+    }
+
+    /**
+     * Get day
+     *
+     * @return \DateTime 
+     */
+    public function getDay()
+    {
+        return $this->day;
+    }
+
+    /**
+     * Set ship
+     *
+     * @param string $ship
+     * @return Planning
+     */
+    public function setShip($ship)
+    {
+        $this->ship = $ship;
+    
+        return $this;
+    }
+
+    /**
+     * Get ship
+     *
+     * @return string 
+     */
+    public function getShip()
+    {
+        return $this->ship;
+    }
+}

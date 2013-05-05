@@ -13,3 +13,7 @@ iaato_sort_ship:
 iaato_sort_company:
     pattern: /sort/company
     defaults: {_controller: EnsiieIaatoBundle:Iaato:sortCompany }
+
+iaato_account:
+    pattern: /account
+    defaults: {_controller: EnsiieIaatoBundle:Iaato:account }
