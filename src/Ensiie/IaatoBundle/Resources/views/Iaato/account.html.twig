@@ -1,10 +1,7 @@
 {% extends "::layout.html.twig" %}
 
 {% block body %}
-    {% if is_granted('ROLE_ADMIN') %}
-       	 <a href="{{ path('iaato_admin') }}">Administration</a>
-    {% endif %}
-
+    
     <div id="account-info">
 	Name: {{ app.user.username }} <br>
 	Email: {{ app.user.email }}

@@ -22,7 +22,12 @@
                     <a href="{{ path('fos_user_security_login') }}">Login</a>
               {% endif %}
 	      
-	      
+	      {% if is_granted('ROLE_ADMIN') %}
+	            <a href="{{ path('iaato_admin') }}"> - Admin</a>
+	      {% endif %}
+
+	      <a href="{{ path('iaato_planning') }}" > - Planning</a>
+
 	      <div id="content" class="nav nav-pills nav-stacked">
 		      <hr>
 		      {% block body %}
@@ -30,7 +35,8 @@
  	      </div>
  
         <footer>
-        <p>IAATO</p>
+	<hr>
+	<p>IAATO</p>
 	</footer>
 
      </div>
