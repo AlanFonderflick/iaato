@@ -21,16 +21,16 @@ class PlanningRepository extends EntityRepository
     }
     public function trieShip()
     {
-        return $this->createQueryBuilder('p')
-                    ->add('orderBy','p.ship.name DESC')
-                    ->getQuery()
+        return $this->_em
+                     ->createQuery('SELECT p FROM EnsiieIaatoBundle:Ship s, EnsiieIaatoBundle:Planning p
+                     WHERE s.id = p.ship ORDER BY s.name ASC') 
                     ->getResult();
     }
     public function trieCompany()
     {
-        return $this->createQueryBuilder('p')
-                    ->add('orderBy','p.company.name DESC')
-                    ->getQuery()
+        return $this->_em
+                    ->createQuery('SELECT p FROM EnsiieIaatoBundle:Ship s, EnsiieIaatoBundle:Planning p, EnsiieIaatoBundle:Company c 
+                      WHERE s.id = p.ship AND s.company = c.id ORDER BY c.name ASC') 
                     ->getResult();
     }
 }
