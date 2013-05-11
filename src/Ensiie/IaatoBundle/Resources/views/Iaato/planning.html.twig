@@ -1,15 +1,14 @@
 {% extends "::layout.html.twig" %}
 
 {% block body %}
-    <div id="sort_planning" >
-    <a href="{{ path('iaato_planning', {'sort':'date'}) }}" > Sort by date</a>
-    |
-    <a href="{{ path('iaato_planning', { 'sort':'ship'}) }}" > Sort by ship</a>
-    |
-    <a href="{{ path('iaato_planning', { 'sort':'company'} ) }}" > Sort by company</a>
-    |
-    <a href="{{ path('iaato_planning', {'sort':'me'} ) }}"> My ship </a>
+    <div class="btn-group">
+     <a class="btn" href="{{ path('iaato_planning', {'sort':'date'}) }}" > Sort by date</a>  
+    <a class="btn" href="{{ path('iaato_planning', { 'sort':'ship'}) }}" > Sort by ship</a>    
+    <a class="btn" href="{{ path('iaato_planning', { 'sort':'company'} ) }}" > Sort by company</a>    
+    <a class="btn" href="{{ path('iaato_planning', {'sort':'me'} ) }}"> My ship </a>
+    </button>
     </div>
+
 
     <table class="table table-hover table-bordered" style:";background-color:white;">
     <thead style="background-color:#49afcd">
