@@ -13,6 +13,11 @@
 
 
 #Useful commands
+###Access website
+`http://localhost/IAATO/web/app_dev.php `
+###Current fixtures
+- username "toto", password "titi"
+- username "admin", password "admin", role "admin"
 ###Update fixtures in database
 php app/console doctrine:fixture:load
 ###Create a user in db 
