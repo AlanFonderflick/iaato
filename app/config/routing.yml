@@ -1,6 +1,10 @@
 ensiie_iaato:
     resource: "@EnsiieIaatoBundle/Resources/config/routing.yml"
     prefix:   /
+    
+ensiie_user:
+    resource: "@EnsiieUserBundle/Resources/config/routing.yml"
+    prefix: /
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
