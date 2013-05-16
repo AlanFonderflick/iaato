@@ -101,7 +101,7 @@ class IaatoController extends Controller
         $em = $this->getDoctrine()
                     ->getManager();
         $planning = $em->getRepository('EnsiieIaatoBundle:Planning')
-                         ->findBy(array('id' => $id));
+                        ->findOneBy(array('id' => $id));
         /*if( ! in_array($planning, $this->sortMe()))
               throw new AccessDeniedHttpException('You cannot edit another\'s planning');*/
          
@@ -112,7 +112,6 @@ class IaatoController extends Controller
         $sites = new EntityChoiceList($em,'Ensiie\IaatoBundle\Entity\Site');     
         
         $form = $this->createFormBuilder($planning)
-                     ->add('date','date')
                      ->add('site1','choice',array(
                            'choice_list' => $sites,
                            'required' => true,
@@ -140,7 +139,7 @@ class IaatoController extends Controller
                         ->getForm();
                      
             return $this->render('EnsiieIaatoBundle:Iaato:planning_edit.html.twig',array(
-                'id' => $id,
+                'planning' => $planning,      
                 "form"=>$form->createView(),
                 "error"=>'',
                'success'=>'',
