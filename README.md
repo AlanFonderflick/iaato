@@ -1,5 +1,4 @@
 #TODO
-- Edit planning (only for my ship)
 - Edit my profile
 - Manage conflicts
 - Admin tools (create/edit/enable-disable/delete account)
@@ -9,7 +8,6 @@
 - Add a explaining text on an edit
 
 #BUGS
-- Get all fos users not working (empy array)
 
 
 #Useful commands
