@@ -102,6 +102,7 @@ class IaatoController extends Controller
                     ->getManager();
         $planning = $em->getRepository('EnsiieIaatoBundle:Planning')
                         ->findOneBy(array('id' => $id));
+        $request = $this->get('request');
         /*if( ! in_array($planning, $this->sortMe()))
               throw new AccessDeniedHttpException('You cannot edit another\'s planning');*/
          
@@ -112,39 +113,58 @@ class IaatoController extends Controller
         $sites = new EntityChoiceList($em,'Ensiie\IaatoBundle\Entity\Site');     
         
         $form = $this->createFormBuilder($planning)
-                     ->add('site1','choice',array(
-                           'choice_list' => $sites,
-                           'required' => true,
-                           'empty_value' => 'Choose a site',
-                           'empty_data'  => null)
-                           )              
-                     ->add('site2','choice',array(
+                     ->add('site_1','choice',array(
                            'choice_list' => $sites,
                            'required' => true,
                            'empty_value' => 'Choose a site',
                            'empty_data'  => null)
                            )
-                    ->add('site3','choice',array(
+                     ->add('duration_1','time')
+                     ->add('site_2','choice',array(
                            'choice_list' => $sites,
                            'required' => true,
                            'empty_value' => 'Choose a site',
                            'empty_data'  => null)
                            )
-                    ->add('site4','choice',array(
+                    ->add('duration_2','time')
+                    ->add('site_3','choice',array(
                            'choice_list' => $sites,
                            'required' => true,
                            'empty_value' => 'Choose a site',
                            'empty_data'  => null)
                            )
-                        ->getForm();
-                     
+                    ->add('duration_3','time')
+                    ->add('site_4','choice',array(
+                           'choice_list' => $sites,
+                           'required' => true,
+                           'empty_value' => 'Choose a site',
+                           'empty_data'  => null)
+                           )
+                    ->add('duration_4','time')
+                     ->getForm();
+              
+            if ($request->getMethod() == 'POST')
+            {
+              $form->bind($request);
+        
+              $em->flush();
+              
+              return $this->render('EnsiieIaatoBundle:Iaato:planning_edit.html.twig',array(
+                'planning' => $planning,      
+                "form"=>$form->createView(),
+                "error"=>'',
+               'success'=>'Success',
+                )
+              );
+            }
+            
             return $this->render('EnsiieIaatoBundle:Iaato:planning_edit.html.twig',array(
                 'planning' => $planning,      
                 "form"=>$form->createView(),
                 "error"=>'',
                'success'=>'',
                 )
-        );
+            );
     }
 }
 
