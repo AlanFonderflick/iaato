@@ -1,5 +1,5 @@
 iaato_planning:
-    pattern: /planning/{sort}
+    pattern: /planning/show/{sort}
     defaults: {_controller: EnsiieIaatoBundle:Iaato:planning, sort:date}
     requirements:
         sort: date|ship|company|me
@@ -11,3 +11,9 @@ iaato_homepage:
 iaato_admin:
     pattern: /admin
     defaults: {_controller: EnsiieIaatoBundle:Iaato:admin }
+
+iaato_planning_edit:
+    pattern: /planning/edit/{id}
+    defaults: {_controller: EnsiieIaatoBundle:Iaato:editPlanning }
+    requirements:
+        id: \d+  

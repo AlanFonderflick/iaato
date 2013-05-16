@@ -121,8 +121,4 @@ class Site
     {
         return $this->longitude;
     }
-     public function __toString()
-    {
-	return $this->name;
-    }
 }

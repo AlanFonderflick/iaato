@@ -37,7 +37,7 @@
         <th> {{ planning.site4.getName() }}  
              <br> Duration: {{ planning.duration4 | date('H:i:s') }}  </th>
 	{% if(app.user.ship == planning.ship) %}
-	<th>	Edit </th>
+	<th>	<a  href="{{ path('iaato_planning_edit', {'id': planning.id }) }}"> Edit </a> </th>
 	{% else %}
 	<th> </th>
 	{% endif %}

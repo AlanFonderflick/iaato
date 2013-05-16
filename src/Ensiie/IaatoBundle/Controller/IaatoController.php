@@ -5,6 +5,11 @@ namespace Ensiie\IaatoBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Bridge\Doctrine\Form\ChoiceList\EntityChoiceList;
+use Symfony\Component\Security\Core\SecurityContext;
+use Ensiie\Bundle\UserBundle\Entity\Planning;
+use Ensiie\Bundle\UserBundle\Entity\User;
+use Ensiie\Bundle\UserBundle\Entity\Site;
 
 
 class IaatoController extends Controller
@@ -90,6 +95,57 @@ class IaatoController extends Controller
                       ->getRepository('EnsiieIaatoBundle:Planning')
                       ->trieMe($user);
         return $liste;
+    }
+    public function editPlanningAction($id)
+    {
+        $em = $this->getDoctrine()
+                    ->getManager();
+        $planning = $em->getRepository('EnsiieIaatoBundle:Planning')
+                         ->findBy(array('id' => $id));
+        /*if( ! in_array($planning, $this->sortMe()))
+              throw new AccessDeniedHttpException('You cannot edit another\'s planning');*/
+         
+        
+             
+               
+        $user = $this->get('security.context')->getToken()->getUser();
+        $sites = new EntityChoiceList($em,'Ensiie\IaatoBundle\Entity\Site');     
+        
+        $form = $this->createFormBuilder($planning)
+                     ->add('date','date')
+                     ->add('site1','choice',array(
+                           'choice_list' => $sites,
+                           'required' => true,
+                           'empty_value' => 'Choose a site',
+                           'empty_data'  => null)
+                           )              
+                     ->add('site2','choice',array(
+                           'choice_list' => $sites,
+                           'required' => true,
+                           'empty_value' => 'Choose a site',
+                           'empty_data'  => null)
+                           )
+                    ->add('site3','choice',array(
+                           'choice_list' => $sites,
+                           'required' => true,
+                           'empty_value' => 'Choose a site',
+                           'empty_data'  => null)
+                           )
+                    ->add('site4','choice',array(
+                           'choice_list' => $sites,
+                           'required' => true,
+                           'empty_value' => 'Choose a site',
+                           'empty_data'  => null)
+                           )
+                        ->getForm();
+                     
+            return $this->render('EnsiieIaatoBundle:Iaato:planning_edit.html.twig',array(
+                'id' => $id,
+                "form"=>$form->createView(),
+                "error"=>'',
+               'success'=>'',
+                )
+        );
     }
 }
 
