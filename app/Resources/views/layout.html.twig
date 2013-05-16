@@ -45,6 +45,7 @@
       <div class="row-fluid">
         <div class="container-fluid">
         {% block subnav %}
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
           <div class="span2" >
             <ul class="menu nav nav-list" style="">
               <li class="nav-header"> My Account </li>
@@ -56,6 +57,7 @@
 
             </ul>
           </div>
+          {% endif %}
           {% endblock %}
               
       <div class="span10" >
