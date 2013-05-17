@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Ensiie\Bundle\UserBundle\Entity\Planning;
 use Ensiie\Bundle\UserBundle\Entity\User;
 use Ensiie\Bundle\UserBundle\Entity\Site;
-
+use Ensiie\IaatoBundle\Form\Type\EditPlanningType;
 
 class IaatoController extends Controller
 {
@@ -108,38 +108,9 @@ class IaatoController extends Controller
                              
                
         $user = $this->get('security.context')->getToken()->getUser();
-        $sites = new EntityChoiceList($em,'Ensiie\IaatoBundle\Entity\Site');     
+        $sites = new EntityChoiceList($em,'Ensiie\IaatoBundle\Entity\Site'); 
         
-        $form = $this->createFormBuilder($planning)
-                     ->add('site_1','choice',array(
-                           'choice_list' => $sites,
-                           'required' => true,
-                           'empty_value' => 'Choose a site',
-                           'empty_data'  => null)
-                           )
-                     ->add('duration_1','time')
-                     ->add('site_2','choice',array(
-                           'choice_list' => $sites,
-                           'required' => true,
-                           'empty_value' => 'Choose a site',
-                           'empty_data'  => null)
-                           )
-                    ->add('duration_2','time')
-                    ->add('site_3','choice',array(
-                           'choice_list' => $sites,
-                           'required' => true,
-                           'empty_value' => 'Choose a site',
-                           'empty_data'  => null)
-                           )
-                    ->add('duration_3','time')
-                    ->add('site_4','choice',array(
-                           'choice_list' => $sites,
-                           'required' => true,
-                           'empty_value' => 'Choose a site',
-                           'empty_data'  => null)
-                           )
-                    ->add('duration_4','time')
-                     ->getForm();
+        $form = $this->createForm(new EditPlanningType($sites), $planning);
               
             if ($request->getMethod() == 'POST')
             {
@@ -152,11 +123,10 @@ class IaatoController extends Controller
                         'error' => 'Conflict with another planning',
                          'conflits' => $conflits
                         )
-                      );  
+                      );                        
               $form->bind($request);
               if($form->isValid())
-              {
-                  
+              {        
                   
                   $em->flush();
               
@@ -189,7 +159,7 @@ class IaatoController extends Controller
         
         foreach($plannings as $planning)
         {
-            if($planning->getDay() == $my_planning->getDay()
+            if($planning->getDay()->format('Y-m-d') == $my_planning->getDay()->format('Y-m-d')
                && $planning->getId() != $my_planning->getId())
             {
                 if($planning->getSite1() == $my_planning->getSite1()
