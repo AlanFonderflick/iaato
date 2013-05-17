@@ -177,10 +177,15 @@ class IaatoController extends Controller
             );
     }
     public function isConflit($form)
+    {   
+            $conflits = $this->getConflict($form);
+            return empty($conflits);                               
+    }
+    public function getConflict($form)
     {
-        $my_planning = $form->getData();
-        
+        $my_planning = $form->getData();        
         $plannings = $this->sortDate();
+        $conflits = array();
         
         foreach($plannings as $planning)
         {
@@ -191,10 +196,10 @@ class IaatoController extends Controller
                 || $planning->getSite2() == $my_planning->getSite2()
                 || $planning->getSite3() == $my_planning->getSite3()
                 || $planning->getSite4() == $my_planning->getSite4())
-                    return true;
+                array_push ($conflits, $planning);
             }           
         }
-        return false;                                     
+        return $conflits;  
     }
 }
 
