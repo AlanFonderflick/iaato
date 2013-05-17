@@ -143,12 +143,14 @@ class IaatoController extends Controller
               
             if ($request->getMethod() == 'POST')
             {
-              if($this->isConflit($form))
+              $conflits = $this->getConflict($form);
+              if(! empty($conflits))
                       return $this->render('EnsiieIaatoBundle:Iaato:planning_edit.html.twig',array(
                         'planning' => $planning,      
                         "form"=>$form->createView(),   
                        'success'=>'',
-                        'error' => 'Conflict with another planning'
+                        'error' => 'Conflict with another planning',
+                         'conflits' => $conflits
                         )
                       );  
               $form->bind($request);
@@ -162,7 +164,8 @@ class IaatoController extends Controller
                     'planning' => $planning,      
                     "form"=>$form->createView(),   
                    'success'=>'Success',
-                    'error' => ''
+                   'error' => '',
+                    'conflits' => array()
                     )
                   );
               }
@@ -172,15 +175,12 @@ class IaatoController extends Controller
                 'planning' => $planning,      
                 "form"=>$form->createView(),   
                'success'=>'',
-                'error' => ''
+                'error' => '',
+                'conflits' => array()
                 )
             );
     }
-    public function isConflit($form)
-    {   
-            $conflits = $this->getConflict($form);
-            return empty($conflits);                               
-    }
+    
     public function getConflict($form)
     {
         $my_planning = $form->getData();        

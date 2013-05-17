@@ -44,6 +44,40 @@
     </table>
 </div>
 
+{% if conflits is empty %}
+{% else %}
+<div >
+<h4> Conflicts </h4>
+ <table class="table table-hover table-bordered" style:";background-color:white;">
+    <thead style="background-color:#49afcd">
+    <tr>
+        <th> Date </th>
+        <th>  Ship </th>
+        <th> Company </th>
+        <th> Site 1</th>
+        <th> Site 2</th>
+        <th> Site 3</th>
+        <th> Site 4</th>
+      </tr>
+     </thead>
+    {% for planning  in conflits %}   
+      <tr>       
+        <th> {{ planning.day | date('d-m-Y')  }} </th>
+        <th> {{ planning.ship.getName()}} </th>
+        <th> {{ planning.ship.company.getName() }} </th>
+        <th> {{ planning.site1.getName() }} 
+             <br> Duration: {{ planning.duration1 | date('H:i:s') }}  </th>
+        <th> {{ planning.site2.getName() }}
+             <br> Duration: {{ planning.duration2 | date('H:i:s') }}  </th>
+        <th> {{ planning.site3.getName() }}
+             <br> Duration: {{ planning.duration3 | date('H:i:s') }}  </th>
+        <th> {{ planning.site4.getName() }}  
+             <br> Duration: {{ planning.duration4 | date('H:i:s') }}  </th>
+             {% endfor %}
+    </table>
+</div>
+{% endif %}
+
 <div class="well">
     <form action="{{ path('iaato_planning_edit', {'id': planning.id }) }}" method="post" {{ form_enctype(form) }}>
         {{ form_errors(form) }}
