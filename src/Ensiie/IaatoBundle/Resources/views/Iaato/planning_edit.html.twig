@@ -4,11 +4,7 @@
 
 <h3>Edit your planning</h3>
 
-{% if error != '' %}
-  <div class="alert alert-error">
-	<p data-dismiss="alert">ERROR : {{ error }}</p>
-  </div>
-{% endif %}
+
 {% if success != '' %}
   <div class="alert alert-success">
 	<p data-dismiss="alert">{{ success }}</p>
@@ -46,7 +42,8 @@
 
 <div class="well">
     <form action="{{ path('iaato_planning_edit', {'id': planning.id }) }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
+        {{ form_errors(form) }}
+        {{ form_widget(form) }}
     <input type="submit" class="btn btn-primary" />
     </form>
 </div>

@@ -103,8 +103,8 @@ class IaatoController extends Controller
         $planning = $em->getRepository('EnsiieIaatoBundle:Planning')
                         ->findOneBy(array('id' => $id));
         $request = $this->get('request');
-        /*if( ! in_array($planning, $this->sortMe()))
-              throw new AccessDeniedHttpException('You cannot edit another\'s planning');*/
+        if( ! in_array($planning, $this->sortMe()))
+              throw new AccessDeniedHttpException('You cannot edit another\'s planning');
          
         
              
@@ -146,22 +146,22 @@ class IaatoController extends Controller
             if ($request->getMethod() == 'POST')
             {
               $form->bind($request);
-        
-              $em->flush();
+              if($form->isValid())
+              {
+                  $em->flush();
               
-              return $this->render('EnsiieIaatoBundle:Iaato:planning_edit.html.twig',array(
-                'planning' => $planning,      
-                "form"=>$form->createView(),
-                "error"=>'',
-               'success'=>'Success',
-                )
-              );
+                  return $this->render('EnsiieIaatoBundle:Iaato:planning_edit.html.twig',array(
+                    'planning' => $planning,      
+                    "form"=>$form->createView(),   
+                   'success'=>'Success',
+                    )
+                  );
+              }
             }
             
             return $this->render('EnsiieIaatoBundle:Iaato:planning_edit.html.twig',array(
                 'planning' => $planning,      
-                "form"=>$form->createView(),
-                "error"=>'',
+                "form"=>$form->createView(),   
                'success'=>'',
                 )
             );
