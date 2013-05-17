@@ -29,7 +29,7 @@ class Ship
     private $name;
 
     /**
-     *@ORM\ManyToOne(targetEntity="Ensiie\IaatoBundle\Entity\Company") 
+     *@ORM\ManyToOne(targetEntity="Ensiie\IaatoBundle\Entity\Company",inversedBy="Ship") 
      *@ORM\JoinColumn(nullable=true)
      */
     private $company;
@@ -66,5 +66,28 @@ class Ship
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set company
+     *
+     * @param \Ensiie\IaatoBundle\Entity\Company $company
+     * @return Ship
+     */
+    public function setCompany(\Ensiie\IaatoBundle\Entity\Company $company = null)
+    {
+        $this->company = $company;
+    
+        return $this;
+    }
+
+    /**
+     * Get company
+     *
+     * @return \Ensiie\IaatoBundle\Entity\Company 
+     */
+    public function getCompany()
+    {
+        return $this->company;
     }
 }

@@ -4,7 +4,11 @@
 
 <h3>Edit your planning</h3>
 
-
+{% if error != '' %}
+  <div class="alert alert-error">
+	<p data-dismiss="alert">ERROR : {{ error }}</p>
+  </div>
+{% endif %}
 {% if success != '' %}
   <div class="alert alert-success">
 	<p data-dismiss="alert">{{ success }}</p>

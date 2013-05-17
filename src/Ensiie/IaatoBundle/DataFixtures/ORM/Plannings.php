@@ -50,7 +50,7 @@ class Plannings extends AbstractFixture implements OrderedFixtureInterface
         $manager->persist($planning);
 //////////////////////////////////////////
         $planning = new Planning();
-        $planning->setDay(new \Datetime("yesterday"));
+        $planning->setDay(new \Datetime("now"));
         $planning->setShip(
             $manager->getRepository("EnsiieIaatoBundle:Ship")
                     ->findOneBy(array("name"=>"Queen Mary"))
@@ -61,15 +61,15 @@ class Plannings extends AbstractFixture implements OrderedFixtureInterface
         );
         $planning->setSite2(
             $manager->getRepository("EnsiieIaatoBundle:Site")
-            ->findOneBy(array("name"=>"L'ile aux pingouins"))
+            ->findOneBy(array("name"=>"L'ile deserte"))
         );
         $planning->setSite3(
             $manager->getRepository("EnsiieIaatoBundle:Site")
-            ->findOneBy(array("name"=>"L'ile aux ours"))
+            ->findOneBy(array("name"=>"L'ile aux pingouins"))
         );
         $planning->setSite4(
             $manager->getRepository("EnsiieIaatoBundle:Site")
-            ->findOneBy(array("name"=>"L'ile deserte"))
+            ->findOneBy(array("name"=>"L'ile aux ours"))
         );
         $planning->setDuration1(new \Datetime('1:08:02'));
         $planning->setDuration2(new \Datetime('6:05:02'));

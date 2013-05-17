@@ -105,9 +105,7 @@ class IaatoController extends Controller
         $request = $this->get('request');
         if( ! in_array($planning, $this->sortMe()))
               throw new AccessDeniedHttpException('You cannot edit another\'s planning');
-         
-        
-             
+                             
                
         $user = $this->get('security.context')->getToken()->getUser();
         $sites = new EntityChoiceList($em,'Ensiie\IaatoBundle\Entity\Site');     
@@ -145,15 +143,26 @@ class IaatoController extends Controller
               
             if ($request->getMethod() == 'POST')
             {
+              if($this->isConflit($form))
+                      return $this->render('EnsiieIaatoBundle:Iaato:planning_edit.html.twig',array(
+                        'planning' => $planning,      
+                        "form"=>$form->createView(),   
+                       'success'=>'',
+                        'error' => 'Conflict with another planning'
+                        )
+                      );  
               $form->bind($request);
               if($form->isValid())
               {
+                  
+                  
                   $em->flush();
               
                   return $this->render('EnsiieIaatoBundle:Iaato:planning_edit.html.twig',array(
                     'planning' => $planning,      
                     "form"=>$form->createView(),   
                    'success'=>'Success',
+                    'error' => ''
                     )
                   );
               }
@@ -163,8 +172,29 @@ class IaatoController extends Controller
                 'planning' => $planning,      
                 "form"=>$form->createView(),   
                'success'=>'',
+                'error' => ''
                 )
             );
+    }
+    public function isConflit($form)
+    {
+        $my_planning = $form->getData();
+        
+        $plannings = $this->sortDate();
+        
+        foreach($plannings as $planning)
+        {
+            if($planning->getDay() == $my_planning->getDay()
+               && $planning->getId() != $my_planning->getId())
+            {
+                if($planning->getSite1() == $my_planning->getSite1()
+                || $planning->getSite2() == $my_planning->getSite2()
+                || $planning->getSite3() == $my_planning->getSite3()
+                || $planning->getSite4() == $my_planning->getSite4())
+                    return true;
+            }           
+        }
+        return false;                                     
     }
 }
 
