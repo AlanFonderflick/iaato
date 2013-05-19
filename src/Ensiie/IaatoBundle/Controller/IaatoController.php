@@ -187,9 +187,10 @@ class IaatoController extends Controller
         $defaultData = array('message' => 'Type your message here');
         $form = $this->createFormBuilder($defaultData)
              ->add('day','date',array(
-                     'mapped' => false
-                 ))             
+                     'mapped' => true,                     
+                 ))               
              ->getForm();
+        //$default = new \DateTime('now');
         
         if ($request->getMethod() == 'POST')
         {
