@@ -1,4 +1,0 @@
-
-ensiie_password_change:
-    pattern: /password/change
-    defaults: {_controller: EnsiieUserBundle:Password:change}

@@ -171,6 +171,17 @@ class IaatoController extends Controller
         }
         return $conflits;  
     }
+    
+    public function freeSiteAction($day,$month,$year)
+    {
+        return $this->render('EnsiieIaatoBundle:Iaato:free_site.html.twig',array(
+
+                        ));
+    }
+    public function requestFreeSiteAction()
+    {
+        return $this->render('EnsiieIaatoBundle:Iaato:request_free_site.html.twig');
+    }
 }
 
 
