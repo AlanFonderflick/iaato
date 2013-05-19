@@ -101,16 +101,16 @@ class IaatoController extends Controller
         $em = $this->getDoctrine()
                     ->getManager();
         $planning = $em->getRepository('EnsiieIaatoBundle:Planning')
-                        ->findOneBy(array('id' => $id));
+                        ->findBy(array('id' => $id));
         $request = $this->get('request');
-        if( ! in_array($planning, $this->sortMe()))
+        if( ! in_array($planning[0], $this->sortMe()))
               throw new AccessDeniedHttpException('You cannot edit another\'s planning');
                              
                
         $user = $this->get('security.context')->getToken()->getUser();
         $sites = new EntityChoiceList($em,'Ensiie\IaatoBundle\Entity\Site'); 
         
-        $form = $this->createForm(new EditPlanningType($sites), $planning);
+        $form = $this->createForm(new EditPlanningType($sites), $planning[0]);
               
             if ($request->getMethod() == 'POST')
             {
