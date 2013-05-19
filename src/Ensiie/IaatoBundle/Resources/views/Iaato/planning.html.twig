@@ -1,16 +1,7 @@
 {% extends "::layout.html.twig" %}
 
 {% block body %}
-    <div >
-        <div class="btn-group">
-            <a class="btn" href="{{ path('iaato_planning', {'sort':'date'}) }}" > Sort by date</a>  
-            <a class="btn" href="{{ path('iaato_planning', { 'sort':'ship'}) }}" > Sort by ship</a>    
-            <a class="btn" href="{{ path('iaato_planning', { 'sort':'company'} ) }}" > Sort by company</a>    
-            <a class="btn" href="{{ path('iaato_planning', {'sort':'me'} ) }}"> My ship </a>
-            </button>
-        </div>
-
-
+    <div >       
             {% include 'EnsiieIaatoBundle:Iaato:view_planning.html.twig' with {'plannings': plannings} %}
  
     </div>

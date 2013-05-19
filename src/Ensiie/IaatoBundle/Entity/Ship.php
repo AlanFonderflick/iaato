@@ -90,4 +90,8 @@ class Ship
     {
         return $this->company;
     }
+     public function __toString()
+    {
+	return $this->name;
+    }
 }

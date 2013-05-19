@@ -7,10 +7,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Bridge\Doctrine\Form\ChoiceList\EntityChoiceList;
 use Symfony\Component\Security\Core\SecurityContext;
-use Ensiie\Bundle\UserBundle\Entity\Planning;
-use Ensiie\Bundle\UserBundle\Entity\User;
-use Ensiie\Bundle\UserBundle\Entity\Site;
+use Ensiie\IaatoBundle\Entity\Planning;
+use Ensiie\UserBundle\Entity\User;
+use Ensiie\IaatoBundle\Entity\Site;
 use Ensiie\IaatoBundle\Form\Type\EditPlanningType;
+use Ensiie\IaatoBundle\Form\Type\AddPlanningType;
 
 class IaatoController extends Controller
 {
@@ -172,12 +173,6 @@ class IaatoController extends Controller
         return $conflits;  
     }
     
-    public function freeSitesAction($day,$month,$year)
-    {
-        return $this->render('EnsiieIaatoBundle:Iaato:free_site.html.twig',array(
-
-                        ));
-    }
     public function requestFreeSitesAction()
     {
         $em = $this->getDoctrine()
@@ -230,6 +225,42 @@ class IaatoController extends Controller
                     'sites' => $free_sites
                 ));
     }
+    
+    public function addPlanningAction()
+    {
+         $em = $this->getDoctrine()
+                    ->getManager();
+        $planning = new Planning();        
+        
+        $request = $this->get('request');
+                                                   
+        $sites = new EntityChoiceList($em,'Ensiie\IaatoBundle\Entity\Site');
+        $ships = new EntityChoiceList($em,'Ensiie\IaatoBundle\Entity\Ship');
+        
+        $form = $this->createForm(new AddPlanningType($sites,$ships), $planning);
+        
+        if ($request->getMethod() == 'POST')
+            {                                  
+              $form->bind($request);
+              
+              if($form->isValid())
+              {   
+                  $em->persist($planning);
+                  $em->flush();
+                  
+                  $this->get('session')->setFlash('notice', 'Your changes were saved!'); 
+            //      return $this->redirect($this->generateUrl('iaato_planning'));
+              }
+            }
+            $plannings = $this->sortDate();
+            
+            return $this->render('EnsiieIaatoBundle:Iaato:planning_add.html.twig',array(    
+                    "form" => $form->createView(), 
+                    "plannings" => $plannings
+                    )
+                  );
+    }
+    
 }
 
 

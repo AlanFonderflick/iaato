@@ -17,8 +17,11 @@ iaato_planning_edit:
     defaults: {_controller: EnsiieIaatoBundle:Iaato:editPlanning }
     requirements:
         id: \d+  
-
         
 iaato_request_free_sites:
     pattern: /request-free-site
     defaults: {_controller: EnsiieIaatoBundle:Iaato:requestFreeSites}
+
+iaato_add_planning:
+    pattern: /planning/add
+    defaults: {_controller: EnsiieIaatoBundle:Iaato:addPlanning}
