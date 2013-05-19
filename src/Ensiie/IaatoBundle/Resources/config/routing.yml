@@ -18,13 +18,6 @@ iaato_planning_edit:
     requirements:
         id: \d+  
 
-iaato_free_sites:
-    pattern: /free-site/{day}/{month}/{year}
-    defaults: {_controller: EnsiieIaatoBundle:Iaato:freeSite}
-    requirements:
-        day: \d+
-        month: \d+
-        year: \d+
         
 iaato_request_free_sites:
     pattern: /request-free-site

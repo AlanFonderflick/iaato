@@ -183,6 +183,8 @@ class IaatoController extends Controller
         $em = $this->getDoctrine()
                    ->getManager();
         $request = $this->get('request');
+            
+        $free_sites = array();
         
         $defaultData = array('message' => 'Type your message here');
         $form = $this->createFormBuilder($defaultData)
@@ -197,15 +199,35 @@ class IaatoController extends Controller
               $form->bind($request);
               $plannings = $em->getRepository('EnsiieIaatoBundle:Planning')
                               ->findByDay($form->get('day')->getData());
+              $sites = $em->getRepository('EnsiieIaatoBundle:Site')
+                          ->findAll();                        
+              
+              foreach( $sites as $site)
+              {
+                  $dispos = array( 1 => true, 2 => true, 3 => true, 4 => true);
+                  
+                  foreach ($plannings as $planning)
+                  {
+                      if($planning->getSite1()->getId() == $site->getId())
+                            $dispos[1] = false;
+                      if($planning->getSite2()->getId() == $site->getId())
+                            $dispos[2] = false;
+                      if($planning->getSite3()->getId() == $site->getId())
+                            $dispos[3] = false;
+                      if($planning->getSite4()->getId() == $site->getId())
+                            $dispos[4] = false;
+                  }
+                  $free_sites[$site->getName()] = $dispos;
+              }
               
               return $this->render('EnsiieIaatoBundle:Iaato:request_free_sites.html.twig', array(
                     'form' => $form->CreateView(),
-                    'plannings' => $plannings
+                    'sites' => $free_sites
                 ));
         }
         return $this->render('EnsiieIaatoBundle:Iaato:request_free_sites.html.twig', array(
                     'form' => $form->CreateView(),
-                    'plannings' => array()
+                    'sites' => $free_sites
                 ));
     }
 }
