@@ -172,15 +172,40 @@ class IaatoController extends Controller
         return $conflits;  
     }
     
-    public function freeSiteAction($day,$month,$year)
+    public function freeSitesAction($day,$month,$year)
     {
         return $this->render('EnsiieIaatoBundle:Iaato:free_site.html.twig',array(
 
                         ));
     }
-    public function requestFreeSiteAction()
+    public function requestFreeSitesAction()
     {
-        return $this->render('EnsiieIaatoBundle:Iaato:request_free_site.html.twig');
+        $em = $this->getDoctrine()
+                   ->getManager();
+        $request = $this->get('request');
+        
+        $defaultData = array('message' => 'Type your message here');
+        $form = $this->createFormBuilder($defaultData)
+             ->add('day','date',array(
+                     'mapped' => false
+                 ))             
+             ->getForm();
+        
+        if ($request->getMethod() == 'POST')
+        {
+              $form->bind($request);
+              $plannings = $em->getRepository('EnsiieIaatoBundle:Planning')
+                              ->findByDay($form->get('day')->getData());
+              
+              return $this->render('EnsiieIaatoBundle:Iaato:request_free_sites.html.twig', array(
+                    'form' => $form->CreateView(),
+                    'plannings' => $plannings
+                ));
+        }
+        return $this->render('EnsiieIaatoBundle:Iaato:request_free_sites.html.twig', array(
+                    'form' => $form->CreateView(),
+                    'plannings' => array()
+                ));
     }
 }
 

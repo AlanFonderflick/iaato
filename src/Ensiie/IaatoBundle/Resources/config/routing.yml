@@ -28,4 +28,4 @@ iaato_free_sites:
         
 iaato_request_free_sites:
     pattern: /request-free-site
-    defaults: {_controller: EnsiieIaatoBundle:Iaato:requestFreeSite}
+    defaults: {_controller: EnsiieIaatoBundle:Iaato:requestFreeSites}
