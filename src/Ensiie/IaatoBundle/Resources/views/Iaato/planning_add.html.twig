@@ -1,0 +1,27 @@
+{% extends "::layout.html.twig" %}
+
+
+
+{% block body %}
+{% if app.session.hasFlash('notice') %}
+    <div class="flash-notice">
+        {{ app.session.flash('notice') }}
+    </div>
+{% endif %}
+
+    <h3>Add a new planning </h3>
+
+<div class="well">
+    <form action="{{ path('iaato_add_planning') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_errors(form) }}
+        {{ form_widget(form) }}
+    <input type="submit" class="btn btn-primary" />
+    </form>
+</div>
+
+<div class="well">
+    <h4> Existing Planning </h4>
+    {% include 'EnsiieIaatoBundle:Iaato:view_planning.html.twig' with {'plannings': plannings} %}   
+</div>
+
+{% endblock %}
