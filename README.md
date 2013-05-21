@@ -6,6 +6,7 @@
 - Website design
 - Csv file upload-download
 - Add a explaining text on an edit
+- Nice CSS
 
 #BUGS
 
